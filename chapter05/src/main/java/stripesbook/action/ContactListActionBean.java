@@ -28,8 +28,8 @@ public class ContactListActionBean extends ContactBaseActionBean {
 	}
 
 	public Resolution delete() {
-		Contact deleted = contactDao.read(getContact());
-		contactDao.delete(getContact());
+		Contact deleted = contactDao.read(getContact().getId());
+		contactDao.delete(getContact().getId());
 		getContext().getMessages().add(
 			new SimpleMessage("Deleted {0}." , deleted));
 		return new RedirectResolution(getClass());

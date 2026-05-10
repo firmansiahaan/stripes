@@ -26,9 +26,9 @@ public class ContactTypeConverter implements TypeConverter<Contact> {
         Collection<ValidationError> errors)
     {
         try {
-        	Contact c = new Contact();
-        	c.setId(Integer.parseInt(string));
-            return contactDao.read(c);
+        	Contact contact = new Contact();
+        	contact.setId(Integer.parseInt(string));
+            return contactDao.read(Integer.parseInt(string));
         }
         catch (Exception exc) {
             errors.add(new SimpleError(

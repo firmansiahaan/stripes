@@ -50,16 +50,16 @@ public abstract class MockDao<T extends ModelBase>
         return objects;
     }
 
-    public T read(T t) {
-        T original = map.get(t.getId());
+    public T read(int id) {
+        T original = map.get(id);
         T copy = copyObject(original);
         return copy != null ? copy : original;
     }
 
-    public void delete(T t) {
-        T object = map.get(t.getId());
+    public void delete(int id) {
+        T object = map.get(id);
         list.remove(object);
-        map.remove(t.getId());
+        map.remove(id);
     }
 
     protected T copyObject(T object) {
