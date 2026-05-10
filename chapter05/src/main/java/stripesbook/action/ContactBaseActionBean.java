@@ -30,7 +30,9 @@ public class ContactBaseActionBean extends BaseActionBean {
 	private Contact contact;
 	public Contact getContact() {
 		if (contact != null) {
-			return contactDao.read(contact);
+			if (contact.getId() != null) {
+				return contactDao.read(contact.getId());
+			}
 		}
 		return contact;
 	}

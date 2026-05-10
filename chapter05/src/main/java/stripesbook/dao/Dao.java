@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface Dao<T> {
     public List<T> read();
-    public T read(T t);
+    public T read(int id);
     public void save(T t);
-    public void delete(T t);
+    public void delete(int id);
 }
