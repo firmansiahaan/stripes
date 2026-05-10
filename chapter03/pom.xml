@@ -4,8 +4,8 @@
   <artifactId>chapter02</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>chapter 02</name>
-  <description>Stripes ...And Java Web Development is fun again - Getting started</description>
+  <name>chapter 03</name>
+  <description>Stripes ...And Java Web Development is fun again - The Core: Action Beans and JSPs</description>
   <build>
     <plugins>
       <plugin>
@@ -54,9 +54,10 @@
 	    <scope>runtime</scope>
 	</dependency>
 	<dependency>
-		<groupId>displaytag</groupId>
-		<artifactId>displaytag</artifactId>
-		<version>1.2</version>
+	    <groupId>displaytag</groupId>
+	    <artifactId>displaytag</artifactId>
+	    <version>1.2</version>
+	    <scope>compile</scope>
 	</dependency>
 	<dependency>
 		<groupId>com.sun.mail</groupId>
