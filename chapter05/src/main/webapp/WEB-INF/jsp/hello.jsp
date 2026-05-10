@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Stripes ...And Java Web Development is fun again</title>
-	<link rel="stylesheet" href="/chapter03/css/style.css" type="text/css">
+	<link rel="stylesheet" href="/chapter05/css/style.css" type="text/css">
 </head>
 <body>
 	<h3>Hello, Stripes!</h3>

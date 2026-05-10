@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>stripes</groupId>
-  <artifactId>chapter03</artifactId>
+  <artifactId>chapter04</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>chapter 03</name>
-  <description>Stripes ...And Java Web Development is fun again - The Core: Action Beans and JSPs</description>
+  <name>chapter 04</name>
+  <description>Stripes ...And Java Web Development is fun again - Validating User Input</description>
   <build>
     <plugins>
       <plugin>

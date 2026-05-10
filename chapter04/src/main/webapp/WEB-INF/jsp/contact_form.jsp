@@ -8,23 +8,23 @@
 			<table class="form">
 				<tr>
 					<td>Email:</td>
-					<td><s:text name="contact.email"/></td>
+					<td><s:text name="contact.email" class="required"/></td>
 				</tr>
 				<tr>
 					<td>First name:</td>
-					<td><s:text name="contact.firstName"/></td>
+					<td><s:text name="contact.firstName" maxlength="40" class="required"/></td>
 				</tr>
 				<tr>
 					<td>Last name:</td>
-					<td><s:text name="contact.lastName"/></td>
+					<td><s:text name="contact.lastName" maxlength="40" class="required"/></td>
 				</tr>
 				<tr>
 					<td>Phone number:</td>
-					<td><s:text name="contact.phoneNumber"/></td>
+					<td><s:text name="contact.phoneNumber" class="required"/></td>
 				</tr>
 				<tr>
 					<td>Birth date:</td>
-					<td><s:text name="contact.birthDate"/></td>
+					<td><s:text name="contact.birthDate" class="required"/></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
