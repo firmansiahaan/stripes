@@ -1,10 +1,10 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jsp" %>
-
+<jsp:useBean class="stripesbook.action.MessageComposeActionBean" id="composes" />
 <s:layout-render name="/WEB-INF/jsp/common/layout_folders.jsp" title="Message Compose" >
 <s:layout-component name="body">
-	<jsp:useBean class="stripesbook.action.ContactListActionBean" id="contactsBean" />
 	<s:form beanclass="stripesbook.action.MessageComposeActionBean" enctype="multipart/form-data">
+	
 	<c:set var="arrow" value="/images/arrow.png"/>
 	<table>
 	<tr>
@@ -15,6 +15,7 @@
 			<td><s:text name="message.to" size="87"/></td>
 			<td>
 				<s:link beanclass="stripesbook.action.MessageComposeActionBean" event="addTo" charset="UTF-8">
+					<s:param name="selectedContacts" value="${composes.contacts}"/>
 					<%-- <s:image name="addTo" src="${arrow}"/>   --%>
 					<%= "&#129092;" %>
 				</s:link>
@@ -25,6 +26,7 @@
 			<td><s:text name="message.cc" size="87"/></td>
 			<td>
 				<s:link beanclass="stripesbook.action.MessageComposeActionBean" event="addCc" charset="UTF-8">
+					<s:param name="selectedContacts" value="${composes.contacts}"/>
 					<%= "&#129092;" %>
 				</s:link>
 			</td>
@@ -34,6 +36,7 @@
 			<td><s:text name="message.bcc" size="87"/></td>
 			<td>
 				<s:link beanclass="stripesbook.action.MessageComposeActionBean" event="addBcc" charset="UTF-8">
+					<s:param name="selectedContacts" value="${composes.contacts}"/>
 					<%= "&#129092;" %>
 				</s:link>
 			</td>
@@ -49,8 +52,8 @@
 		</table>
 	</th>
 	<th valign="top">
-		<s:select name="contacts" multiple="true" size="7">
-			<s:options-collection collection="${contactsBean.contacts}" value="id" sort="firstName" />
+		<s:select name="selectedContacts" multiple="true" size="7">
+			<s:options-collection collection="${composes.allContacts}" value="id" sort="firstName" />
 		</s:select>
 	</th>
 	</tr>
@@ -80,7 +83,7 @@
 		<br><br><br><br><br><br>
 		<s:link beanclass="stripesbook.action.MessageListActionBean">Back to message list</s:link>
 	</p>
-	
+
 	</s:form>
 	
 </s:layout-component>	

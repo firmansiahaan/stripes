@@ -13,30 +13,35 @@ import stripesbook.model.Contact;
 
 public class ContactListActionBean extends ContactBaseActionBean {
 	
-	private static final String LIST= "/WEB-INF/jsp/contact_list.jsp" ;
-	
-	private ContactDao contactDao = MockContactDao.getInstance();
+	private static final String LIST="/WEB-INF/jsp/contact_list.jsp";
+    private static final String VIEW="/WEB-INF/jsp/contact_view.jsp";
 
-	@DefaultHandler
-	public Resolution list() {
-		return new ForwardResolution(LIST);
-	}
-	
-	private static final String VIEW="/WEB-INF/jsp/contact_view.jsp" ;
-	public Resolution view() {
-		return new ForwardResolution(VIEW);
-	}
+    @DefaultHandler
+    public Resolution list() {
+        return new ForwardResolution(LIST);
+    }
 
-	public Resolution delete() {
-		Contact deleted = contactDao.read(getContact().getId());
-		contactDao.delete(getContact().getId());
-		getContext().getMessages().add(
-			new SimpleMessage("Deleted {0}." , deleted));
-		return new RedirectResolution(getClass());
+    public Resolution view() {
+        return new ForwardResolution(VIEW);
+    }
+
+    public Resolution delete() {
+        Contact deleted = getContact();
+        getContactDao().delete(deleted.getId());
+        getContext().getMessages().add(
+            new SimpleMessage("Deleted {0}.", deleted)
+        );
+        return new RedirectResolution(getClass());
+    }
+
+    private List<Contact> contacts;
+    public List<Contact> getContacts() {
+    	contacts = contacttDao.read();
+		return contacts;
 	}
-	
-	public List<Contact> getContacts() {
-		return contactDao.read();
+    public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
-	
+        
+    private ContactDao contacttDao = MockContactDao.getInstance();
 }

@@ -16,14 +16,16 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationError;
 import stripesbook.dao.AttachmentDao;
+import stripesbook.dao.ContactDao;
 import stripesbook.dao.FolderDao;
 import stripesbook.dao.mock.MockAttachmentDao;
+import stripesbook.dao.mock.MockContactDao;
 import stripesbook.dao.mock.MockFolderDao;
 import stripesbook.model.Attachment;
 import stripesbook.model.Contact;
 import stripesbook.model.Message;
 
-public class MessageComposeActionBean extends ContactBaseActionBean {
+public class MessageComposeActionBean extends BaseActionBean {
     private static final String COMPOSE =
         "/WEB-INF/jsp/message_compose.jsp";
 
@@ -49,7 +51,6 @@ public class MessageComposeActionBean extends ContactBaseActionBean {
         return new RedirectResolution(MessageListActionBean.class);
     }
     
-    @DontValidate
     public Resolution addTo() {
     	getMessage().setTo(getRecipientString(getMessage().getTo()));
 	    return new ForwardResolution(COMPOSE);
@@ -95,7 +96,6 @@ public class MessageComposeActionBean extends ContactBaseActionBean {
         getMessage().addAttachment(attachment);
     }
     
-    
     public Resolution deleteAttachment() throws Exception {
         Attachment attachment =
             getMessage().getAttachments().remove(deleteIndex);
@@ -106,37 +106,28 @@ public class MessageComposeActionBean extends ContactBaseActionBean {
     }
     
     private String getRecipientString(String previous) {
-        if (contacts != null) {
-            StringBuilder result = new StringBuilder();
-
-            for (Contact contact : contacts) {
-                result.append(contact).append(',');
-            }
-            result.setLength(result.length() - 1);
-            String recpt = (previous == null) ? "" : previous + ",";
-            return recpt + result.toString();
+        if (contacts == null) {
+        	return MockContactDao.getInstance().read().get(0).getFirstName();
         }
-        return previous;
-    }
-
-    private List<Contact> contacts;
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-    
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+        else {
+	        StringBuilder result = new StringBuilder();
+	
+	        for (Contact contact : contacts) {
+	            result.append(contact).append(',');
+	        }
+	        result.setLength(result.length() - 1);
+	        String recpt = (previous == null) ? "" : previous + ",";
+	        return recpt + result.toString();
+        }
     }
 
     @ValidateNestedProperties({
         @Validate(field="to", required=true, on="send"),
         @Validate(field="subject", required=true, on="send")
     })
-    
     public Message getMessage() {
         return getContext().getMessageCompose();
     }
-    
     public void setMessage(Message message) {
         getContext().setMessageCompose(message);
     }
@@ -145,7 +136,6 @@ public class MessageComposeActionBean extends ContactBaseActionBean {
     public List<FileBean> getAttachments() {
         return attachments;
     }
-    
     public void setAttachments(List<FileBean> attachments) {
         this.attachments = attachments;
     }
@@ -157,9 +147,21 @@ public class MessageComposeActionBean extends ContactBaseActionBean {
     public void setDeleteIndex(int deleteIndex) {
         this.deleteIndex = deleteIndex;
     }
-
-    private AttachmentDao attachmentDao =
-        MockAttachmentDao.getInstance();
-
+    
+    private List<Contact> contacts;
+    public List<Contact> getContacts() {
+		return contacts;
+	}
+    public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+    public List<Contact> getAllContacts() {
+    	contacts = contacttDao.read();
+		return contacts;
+	}
+        
+    private ContactDao contacttDao = MockContactDao.getInstance();
+	private AttachmentDao attachmentDao = MockAttachmentDao.getInstance();
     private FolderDao folderDao = MockFolderDao.getInstance();
+    
 }
