@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+	<persistence-unit name="stripes_webmail"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>stripesbook.model.Alias</class>
+		<class>stripesbook.model.Attachment</class>
+		<class>stripesbook.model.Contact</class>
+		<class>stripesbook.model.Folder</class>
+		<class>stripesbook.model.Message</class>
+		<class>stripesbook.model.ModelBase</class>
+		<class>stripesbook.model.PhoneNumber</class>
+		<class>stripesbook.model.User</class>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<properties>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/stripes_webmail?currentSchema=stripes_webmail"/>
+	        <property name="hibernate.connection.username" value="root"/>
+		    <property name="hibernate.connection.password" value="password"/>
+		    <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+			<property name="hibernate.archive.autodetection" value="class"/>
+		    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+            <property name="hibernate.connection.pool_size" value="10"/>
+            <property name="jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform"/>
+			
+		</properties>
+	</persistence-unit>
+</persistence>
