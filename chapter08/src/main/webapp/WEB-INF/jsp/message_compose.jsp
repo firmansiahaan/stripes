@@ -73,7 +73,7 @@
 	
 	<s:hidden id="deleteIndex" name="deleteIndex"/>
 	<c:forEach items="${actionBean.message.attachments}" var="attach" varStatus="loop" >
-		<s:image name="deleteAttachment" src="/images/delete.gif" onclick="getElementById('deleteIndex').value=${loop.index}"
+		<s:image name="deleteAttachment" src="/images/delete.png" onclick="getElementById('deleteIndex').value=${loop.index}"
 			style="border: none; vertical-align: bottom" />
 		${attach.fileName} (${attach.size} bytes)
 		<br/>
