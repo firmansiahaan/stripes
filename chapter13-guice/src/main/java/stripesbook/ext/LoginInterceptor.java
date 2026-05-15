@@ -29,7 +29,7 @@ public class LoginInterceptor implements Interceptor {
 		if (ctx.getUser() == null && !ALLOW.contains(cls)) {
 			resolution = new RedirectResolution(LoginActionBean.class);
 		}
+		
 		return resolution;
 	}
-
 }

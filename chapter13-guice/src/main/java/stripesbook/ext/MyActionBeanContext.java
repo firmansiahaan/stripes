@@ -45,6 +45,9 @@ public class MyActionBeanContext extends ActionBeanContext {
     }
     public User getUser() {
         Integer userId = getCurrent(USER, null);
+        if (userId == null) {
+        	userId = 0;
+        }
         return userDao.read(userId);
     }
     protected void setCurrent(String key, Object value) {
