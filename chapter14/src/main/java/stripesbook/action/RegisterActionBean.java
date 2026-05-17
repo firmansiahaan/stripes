@@ -1,6 +1,8 @@
 package stripesbook.action;
 
 import java.util.Collection;
+
+import javax.annotation.security.PermitAll;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.DontValidate;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -17,8 +19,11 @@ import net.sourceforge.stripes.validation.ValidationMetadata;
 import net.sourceforge.stripes.validation.ValidationMethod;
 import stripesbook.model.Alias;
 import stripesbook.model.Folder;
+import stripesbook.model.User;
+import stripesbook.nonext.PasswordTypeConverter;
 
 @Wizard(startEvents={"view","done"})
+@PermitAll
 public class RegisterActionBean extends BaseActionBean
     implements ValidationErrorHandler
 {
@@ -59,21 +64,20 @@ public class RegisterActionBean extends BaseActionBean
     }
     
     @ValidateNestedProperties({
-        @Validate(field="firstName", required=true),
-        @Validate(field="lastName",  required=true),
-        @Validate(field="username",  required=true),
-        @Validate(field="password",  required=true)
-    })   
-//    private User user;
-//    public User getUser() {
-//        return user;
-//    }
-//    
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    	@Validate(field="firstName" , required=true),
+    	@Validate(field="lastName" , required=true),
+    	@Validate(field="username" , required=true),
+    	@Validate(field="password" , required=true, converter=PasswordTypeConverter.class)
+    })  
+    private User user;
+    public User getUser() {
+        return user;
+    }  
+    public void setUser(User user) {
+        this.user = user;
+    }
     
-    @Validate(required=true)
+    @Validate(required=true, converter=PasswordTypeConverter.class)
     private String confirmPassword;
     public String getConfirmPassword() {
         return confirmPassword;
@@ -110,17 +114,15 @@ public class RegisterActionBean extends BaseActionBean
 
     @ValidationMethod
     public void validateUsernameAndPasswords(ValidationErrors errors){
-    	if (user != null) {
-	        String username = user.getUsername();
-	        if (userDao.findByUsername(username) != null) {
-	            errors.addGlobalError(
-	              new LocalizableError("usernameAlreadyTaken", username));
-	        }
-	        if (!user.getPassword().equals(confirmPassword)) {
-	            errors.addGlobalError(
-	                new LocalizableError("passwordsDontMatch"));
-	        }
-    	}
+        String username = user.getUsername();
+        if (userDao.findByUsername(username) != null) {
+            errors.addGlobalError(
+              new LocalizableError("usernameAlreadyTaken", username));
+        }
+        if (!user.getPassword().equals(confirmPassword)) {
+            errors.addGlobalError(
+                new LocalizableError("passwordsDontMatch"));
+        }
     }
     
     @ValidationMethod(on="save")

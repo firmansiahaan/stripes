@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>chapter 11</display-name>
+	<description>Stripes ...And Java Web Development is fun again - chapter 11</description>
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>StripesResources</param-value>
+	</context-param>
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>StripesFilter</filter-name>
+		<filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+		<init-param>
+			<param-name>ActionResolver.Packages</param-name>
+			<param-value>stripesbook.action</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Extension.Packages</param-name>
+			<param-value>
+				stripesbook.ext,
+				org.stripesstuff.stripersist,
+				net.sourceforge.stripes.integration.spring,
+				org.stripesstuff.plugin.security
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>LocalePicker.Locales</param-name>
+			<param-value>en,fr</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FileUpload.MaximumPostSize</param-name>
+			<param-value>5M</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Validation.InvokeValidateWhenErrorsExist</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+	        <param-name>MultipartWrapper.Class</param-name>
+	        <param-value>net.sourceforge.stripes.controller.multipart.CommonsMultipartWrapper</param-value>
+	    </init-param>
+	    <init-param>
+			<param-name>PopulationStrategy.Class</param-name>
+			<param-value>
+				net.sourceforge.stripes.tag.BeanFirstPopulationStrategy
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>SecurityManager.Class</param-name>
+			<param-value>
+				stripesbook.nonext.MySecurityManager
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Stripes.EncryptionKey</param-name>
+			<param-value>
+				some very long string used as an encryption key
+			</param-value>
+		</init-param>
+	</filter>
+
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<filter-mapping>
+		<filter-name>StripesFilter</filter-name>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>*.abc</url-pattern>
+	</servlet-mapping>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/not_found.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/jsp/unauthorized.jsp</location>
+	</error-page>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
