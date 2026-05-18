@@ -14,7 +14,7 @@ public class HelloAjaxActionBean extends BaseActionBean {
 	}
 	
 	@DefaultHandler
-	public Resolution currentDate() {
+	public Resolution current() {
 		return new ForwardResolution(VIEW);
 	}
 	
