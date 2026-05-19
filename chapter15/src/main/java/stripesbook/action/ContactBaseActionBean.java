@@ -1,10 +1,13 @@
 package stripesbook.action;
 
+import java.util.List;
+
 import stripesbook.model.Contact;
 import stripesbook.model.User;
 
 public abstract class ContactBaseActionBean extends BaseActionBean {
     private Contact contact;
+    public List<Contact> contacts;
 
     public Contact getContact() {
         return contact;

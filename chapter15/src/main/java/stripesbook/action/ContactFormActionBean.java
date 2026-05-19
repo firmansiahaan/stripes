@@ -34,7 +34,8 @@ public class ContactFormActionBean extends ContactBaseActionBean {
         getContext().getMessages().add(
             getLocalizableMessage("contactSaved", contact)
         );
-        return new RedirectResolution(ContactListActionBean.class);
+        getContext().getResponse().setHeader("X-Stripes-Success", "true");
+        return new ForwardResolution(ContactListActionBean.class, "table");
     }
     
     @DontValidate
