@@ -19,7 +19,7 @@ import stripesbook.model.Gender;
 
 @PermitAll
 public class ContactFormActionBean extends ContactBaseActionBean {
-    private static final String FORM="/WEB-INF/jsp/contact_form.jsp";
+    private static final String FORM="/WEB-INF/jsp/parts/contact_form.jsp";
 
     @DefaultHandler
     public Resolution form() {
