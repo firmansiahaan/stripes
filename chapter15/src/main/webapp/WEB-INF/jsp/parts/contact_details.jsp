@@ -9,11 +9,11 @@
 	</tr>
 	<tr>
 		<td class="label">Last name:</td>
-		<td class="value">${actionBean.contact.lastName}</td>
+		<td class="value">${fn:escapeXml({actionBean.contact.lastName})</td>
 	</tr>
 	<tr>
 		<td class="label">Email:</td>
-		<td class="value">${actionBean.contact.email}</td>
+		<td class="value">${fn:escapeXml({actionBean.contact.email})</td>
 	</tr>
 	<tr>
 		<td class="label">Phone number:</td>

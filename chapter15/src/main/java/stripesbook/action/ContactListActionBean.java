@@ -13,8 +13,8 @@ import stripesbook.model.Contact;
 @PermitAll
 public class ContactListActionBean extends ContactBaseActionBean {
 	private static final String LIST="/WEB-INF/jsp/contact_list.jsp";
-    private static final String VIEW="/WEB-INF/jsp/contact_view.jsp";
-    private static final String TABLE="/WEB-INF/jsp/contact_table.jsp";
+    private static final String VIEW="/WEB-INF/jsp/parts/contact_view.jsp";
+    private static final String TABLE="/WEB-INF/jsp/parts/contact_table.jsp";
     private static final String DETAILS = "/WEB-INF/jsp/parts/contact_details.jsp" ;
     public String filter;
 

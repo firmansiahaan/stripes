@@ -9,8 +9,8 @@
 		<s:url var="url" beanclass="stripesbook.action.ContactListActionBean" />
 		<fmt:message key="contactList.filter"/>:
 		<input type="text" onkeyup="filterContacts(this, '${url}');"/>
-		
-		<s:form beanclass="stripesbook.action.MessageListActionBean">
+		<br><br>
+		<s:form beanclass="stripesbook.action.ContactListActionBean">
 			<d:table name="${actionBean.contacts}" id="contact" requestURI="" defaultsort="1">
 				<d:column title="Last Name" property="lastName" sortable="true"/>
 				<d:column title="First Name" property="firstName" sortable="true"/>
