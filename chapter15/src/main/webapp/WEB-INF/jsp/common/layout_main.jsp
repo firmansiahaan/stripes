@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<title>${title}</title>
-		<script src="${contextPath}/js/prototype.js" type="text/javascript"></script>
+		<script src="${contextPath}/js/jquery-4.0.0.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css" >
 		<s:layout-component name="head"/>
 	</head>
@@ -22,7 +22,7 @@
 			</span>
 		</div>
 		<div id="body">
-			<h3>${title}</h3>
+<%-- 			<h3>${title}</h3> --%>
 			<s:layout-component name="body"/>
 			<p>
 				<fmt:message var="otherLocale" key="layout.otherLocale"/>

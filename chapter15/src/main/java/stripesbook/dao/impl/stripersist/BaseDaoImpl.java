@@ -8,9 +8,10 @@ import org.hibernate.Session;
 import org.stripesstuff.stripersist.Stripersist;
 
 import jakarta.persistence.NonUniqueResultException;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
-
+import jakarta.persistence.metamodel.EntityType;
 import stripesbook.dao.Dao;
 import stripesbook.model.User;
 
@@ -88,5 +89,14 @@ public abstract class BaseDaoImpl<T,ID extends Serializable>
         catch (NoResultException exc) {
             return null;
         }
+    }
+    
+    public Class<?> getEntityClass(EntityManager entityManager, String entityName) {
+        for (EntityType<?> entity : entityManager.getMetamodel().getEntities()) {
+            if (entityName.equals(entity.getName())) {
+                return entity.getJavaType();
+            }
+        }
+        return null;
     }
 }

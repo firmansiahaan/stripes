@@ -12,14 +12,17 @@ import stripesbook.model.Contact;
 
 @PermitAll
 public class ContactListActionBean extends ContactBaseActionBean {
-    private static final String LIST="/WEB-INF/jsp/contact_list.jsp";
+	private static final String LIST="/WEB-INF/jsp/contact_list.jsp";
     private static final String VIEW="/WEB-INF/jsp/contact_view.jsp";
+    private static final String TABLE="/WEB-INF/jsp/contact_table.jsp";
+    private static final String DETAILS = "/WEB-INF/jsp/parts/contact_details.jsp" ;
+    public String filter;
 
     @DefaultHandler
     public Resolution list() {
         return new ForwardResolution(LIST);
     }
-
+    
     public Resolution view() {
         return new ForwardResolution(VIEW);
     }
@@ -35,7 +38,19 @@ public class ContactListActionBean extends ContactBaseActionBean {
         return new RedirectResolution(getClass());
     }
 
+    public Resolution findByName() {
+    	if (filter != null && filter.length() > 0) {
+    		contacts = contactDao.findByName(filter, getUser());
+    	}
+    	return new ForwardResolution(TABLE);
+    }
+
     public Collection<Contact> getContacts() {
         return getUser().getContacts();
     }
+    
+    public Resolution details() {
+    	return new ForwardResolution(DETAILS);
+    }
+    
 }

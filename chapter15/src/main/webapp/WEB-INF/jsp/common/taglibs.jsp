@@ -10,3 +10,5 @@
 <%-- <c:set var="prefix" value="${actionBean.class.name}"/> --%>
 
 <%@ page isELIgnored="false" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/contact_form.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/contact_list.js"></script>

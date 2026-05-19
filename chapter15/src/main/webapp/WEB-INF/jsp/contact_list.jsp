@@ -6,25 +6,24 @@
 		<s:link beanclass="stripesbook.action.ContactFormActionBean">
 			Create a New Contact
 		</s:link>
-		<d:table name="${actionBean.contacts}" id="contact" requestURI="" defaultsort="1">
-			<d:column title="Last Name" property="lastName" sortable="true"/>
-			<d:column title="First Name" property="firstName" sortable="true"/>
-			<d:column title="Email" property="email" sortable="true"/>
-			<d:column title="Action">
-				<s:link beanclass="stripesbook.action.ContactListActionBean" event="view" >
-					<s:param name="contact" value="${contact}"/>
-					View
-				</s:link> | 
-				<s:link beanclass="stripesbook.action.ContactFormActionBean">
-					<s:param name="contact" value="${contact}"/>
-					Update
-				</s:link> | 
-				<s:link beanclass="stripesbook.action.ContactListActionBean" event="delete" 
-					onclick="return confirm('Delete ${contact}?');" >
-					<s:param name="contact" value="${contact}"/>
-					Delete
-				</s:link>
-			</d:column>
-		</d:table>
+		<s:url var="url" beanclass="stripesbook.action.ContactListActionBean" />
+		<fmt:message key="contactList.filter"/>:
+		<input type="text" onkeyup="filterContacts(this, '${url}');"/>
+		
+		<s:form beanclass="stripesbook.action.MessageListActionBean">
+			<d:table name="${actionBean.contacts}" id="contact" requestURI="" defaultsort="1">
+				<d:column title="Last Name" property="lastName" sortable="true"/>
+				<d:column title="First Name" property="firstName" sortable="true"/>
+				<d:column title="Email" property="email" sortable="true"/>
+				<d:column title="Action">
+					<div id="contact_table" style="float: left">
+						<%@include file="/WEB-INF/jsp/parts/contact_table.jsp" %>
+					</div>
+				</d:column>
+			</d:table>
+		</s:form>		
+		<div id="contact_details" style="float: left"></div>
+		<div style="clear: both"></div>
+		<div id="contact_form"></div>
 	</s:layout-component>
 </s:layout-render>

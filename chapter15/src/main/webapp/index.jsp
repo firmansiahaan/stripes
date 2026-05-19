@@ -1,1 +1,1 @@
-<jsp:forward page="/HelloAjax.abc" />
+<jsp:forward page="/MessageList.abc" />
